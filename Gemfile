@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+gem "mongoid", "~> 4.0.0"
+# Authentication
+gem 'devise', '~> 3.4.0'
+# Ability
+gem 'cancancan'
+# Project Database management
+gem 'rails_admin'
+# History
+gem 'mongoid-audit', '~> 1.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
