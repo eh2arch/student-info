@@ -15,9 +15,23 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ## Admin role
+  field :admin, type: Boolean, default: false
+
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  field :first_name,         type: String, default: ""
+  field :last_name,          type: String, default: ""
+  field :date_of_birth,      type: DateTime, default: DateTime.now
+  field :gender,             type: String, default: "male"
+  field :year_of_joining,    type: Integer, default: 2010
+  field :branch,             type: String, default: "IT"
+  field :contact_number,     type: Integer, default: "9999999999"
+  field :address,            type: String, default: ""
+  field :hobbies,            type: Array, default: []
+
+  field :disable,            type: Boolean, default: true
 
   ## Recoverable
   field :reset_password_token,   type: String
