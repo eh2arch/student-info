@@ -14,23 +14,23 @@
                     <div class="row">
                         <div class="col m6 s12">
                             <div class="input-field"><i class="fa fa-user prefix"></i>
-                              <%= f.text_field :first_name %>
+                              <%= f.text_field :first_name, class: "tooltipped", data: { regex: "^[A-Za-z]+$", tooltip: "Name should only contain alphabets and shouldn't be blank", position: "bottom", delay: "25" } %>
                                 <label for="user_first_name">First Name</label>
                             </div>
                         </div>
                         <div class="col m6 s12">
                             <div class="input-field"><i class="fa fa-user prefix"></i>
-                              <%= f.text_field :last_name %>
+                              <%= f.text_field :last_name, class: "tooltipped", data: { regex: "^[A-Za-z]+$", tooltip: "Name should only contain alphabets and shouldn't be blank", position: "bottom", delay: "25" }  %>
                                 <label for="user_last_name">Last Name</label>
                             </div>
                         </div>
                     </div>
                     <div class="input-field"><i class="fa fa-envelope prefix"></i>
-                        <%= f.email_field :email %>
+                        <%= f.email_field :email, class: "tooltipped", data: { regex: "\\A[^@]+@[^@]+\\z", tooltip: "Enter a valid email", position: "bottom", delay: "25" } %>
                         <label for="user_email">Email</label>
                     </div>
                     <div class="input-field"><i class="fa fa-unlock-alt prefix"></i>
-                        <%= f.password_field :password, autocomplete: "off" %>
+                        <%= f.password_field :password, autocomplete: "off", class: "tooltipped", data: { regex: ".{8,}", tooltip: "Enter a valid password", position: "bottom", delay: "25" } %>
                         <label for="user_password">
                           Password
                           <% if @validatable %>
@@ -39,7 +39,7 @@
                         </label>
                     </div>
                     <div class="input-field"><i class="fa fa-unlock-alt prefix"></i>
-                        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                        <%= f.password_field :password_confirmation, autocomplete: "off", class: "tooltipped", data: { regex: ".{8,}", tooltip: "Passwords should match", position: "bottom", delay: "25" } %>
                         <label for="user_password_confirmation">
                           Confirm Password
                         </label>
@@ -75,11 +75,11 @@
                       </div>
                     </div>
                     <div class="input-field"><i class="fa fa-phone prefix"></i>
-                      <%= f.text_field :contact_number %>
+                      <%= f.text_field :contact_number, class: "tooltipped", data: { regex: "^[0-9]{10}$", tooltip: "Enter a valid contact number", position: "bottom", delay: "25" } %>
                         <label for="user_contact_number">Contact Number</label>
                     </div>
                     <div class="input-field"><i class="fa fa-home prefix"></i>
-                      <%= f.text_area :address, class: "materialize-textarea" %>
+                      <%= f.text_area :address, class: "materialize-textarea tooltipped", data: { regex: ".+", tooltip: "Please enter a valid address", position: "bottom", delay: "25" } %>
                         <label for="user_address">Address</label>
                     </div>
                     <div class="input-field">

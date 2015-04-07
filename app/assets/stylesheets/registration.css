@@ -1,0 +1,7 @@
+.input_error {
+	border-bottom:1px solid #EA415B !important;
+	box-shadow:0 1px 0 0 #EA415B !important;
+}
+.i_error {
+	color: #EA415B !important;
+}
