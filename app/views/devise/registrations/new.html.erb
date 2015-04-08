@@ -3,7 +3,7 @@
             <%#= devise_error_messages! %>
                 <div class="row links">
                     <div class="col s6 logo"><img alt=""></div>
-                    <div class="col s6 right-align"><a href="/users/sign_in">Sign In</a> / <strong>Sign Up</strong></div>
+                    <div class="col s6 right-align"><a href=<%="/#{resource_name.to_s.pluralize}/sign_in"%>>Sign In</a> / <strong>Sign Up</strong></div>
                 </div>
                 <div class="card-panel">
                     <div class="row socials">
@@ -90,10 +90,27 @@
                       <%= f.check_box :hobbies, { multiple: true }, "Reading", nil %><label for="user_hobbies_reading">Reading</label>
                     </div>
                     <br />
+                    <br />
+                    <div class="file-field input-field">
+                      <input class="file-path validate" type="text"/>
+                      <div class="btn">
+                        <span>File</span>
+                        <input type="file" />
+                      </div>
+                    </div>
                     <p>
                         <input type="checkbox" id="checkbox_terms">
                         <label for="checkbox_terms">I agree to the <a href="#">terms of use</a>.</label>
                     </p>
-                    <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover">Sign Up</button>
+                    <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover modal-trigger" href="#modal1">Sign Up</button>
                 </div>
               <% end %>
+
+              <!-- Modal Structure -->
+              <div id="modal1" class="modal z-depth-4 blue lighten-2 white-text">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+                <div class="action-bar">
+                  <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
+                </div>
+              </div>
