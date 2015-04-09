@@ -27,6 +27,7 @@ class User
   field :gender,             type: String, default: "male"
   field :year_of_joining,    type: Integer, default: 2010
   field :branch,             type: String, default: "IT"
+  field :registration_no,    type: String, default: ""
   field :contact_number,     type: Integer, default: "9999999999"
   field :address,            type: String, default: ""
   field :hobbies,            type: Array, default: []
