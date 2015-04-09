@@ -1,6 +1,6 @@
           <%@title = "Sign Up" %>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%#= devise_error_messages! %>
+            <%= devise_error_messages! %>
                 <div class="row links">
                     <div class="col s6 logo"><img alt=""></div>
                     <div class="col s6 right-align"><a href=<%="/#{resource_name.to_s.pluralize}/sign_in"%>>Sign In</a> / <strong>Sign Up</strong></div>
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="input-field"><i class="fa fa-envelope prefix"></i>
-                        <%= f.email_field :email, class: "tooltipped", data: { regex: "\\A[^@]+@[^@]+\\z", tooltip: "Enter a valid email", position: "bottom", delay: "25" } %>
+                        <%= f.email_field :email, class: "tooltipped", data: { regex: "[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", tooltip: "Enter a valid email", position: "bottom", delay: "25" } %>
                         <label for="user_email">Email</label>
                     </div>
                     <div class="input-field"><i class="fa fa-unlock-alt prefix"></i>
@@ -45,7 +45,7 @@
                         </label>
                     </div>
                     <div class="input-field"><i class="fa fa-calendar prefix"></i>
-                      <%= f.date_field :date_of_birth, autocomplete: "off", :class => "datepicker" %>
+                      <%= f.date_field :date_of_birth, autocomplete: "off", class: "datepicker tooltipped", data: { regex: ".+", tooltip: "Please select a date", position: "bottom", delay: "25" } %>
                         <label for="user_date_of_birth">
                           Date of Birth
                         </label>
@@ -74,6 +74,36 @@
                         </div>
                       </div>
                     </div>
+                    <div class="input-field"><i class="fa fa-graduation-cap prefix"></i>
+                      <%= f.text_field :roll_no, autocomplete: "off", class: "tooltipped", data: { regex: "^[0-9]{2}-[A-Z]{2,}-[0-9]+$", tooltip: "Enter a valid Roll no.", position: "bottom", delay: "25" } %>
+                        <label for="user_roll_no">
+                          Roll Number
+                        </label>
+                    </div>
+                    <div class="input-field"><i class="fa fa-credit-card prefix"></i>
+                      <%= f.text_field :registration_no, autocomplete: "off", class: "tooltipped", data: { regex: "^[0-9]{8,}$", tooltip: "Enter a valid registration no.", position: "bottom", delay: "25" } %>
+                        <label for="user_registration_no">
+                          Registration Number
+                        </label>
+                    </div>
+                    <div class="input-field"><i class="fa fa-bar-chart prefix"></i>
+                      <%= f.text_field :cgpa, autocomplete: "off", class: "tooltipped", data: { regex: "^[0-9]{1,2}[\\.]{0,1}[0-9]*$", tooltip: "Enter a valid CGPA", position: "bottom", delay: "25" } %>
+                        <label for="user_cgpa">
+                          CGPA
+                        </label>
+                    </div>
+                    <div class="input-field"><i class="fa fa-info prefix"></i>
+                      <%= f.text_field :rank_aieee, autocomplete: "off", class: "tooltipped", data: { regex: "^[0-9]+$", tooltip: "Enter a valid aieee rank", position: "bottom", delay: "25" } %>
+                        <label for="user_rank_aieee">
+                          AIEEE Rank
+                        </label>
+                    </div>
+                    <div class="input-field"><i class="fa fa-institution prefix"></i>
+                      <%= f.text_field :school, autocomplete: "off", class: "tooltipped", data: { regex: ".+", tooltip: "Enter a valid school name", position: "bottom", delay: "25" } %>
+                        <label for="user_school">
+                          School Name
+                        </label>
+                    </div>
                     <div class="input-field"><i class="fa fa-phone prefix"></i>
                       <%= f.text_field :contact_number, class: "tooltipped", data: { regex: "^[0-9]{10}$", tooltip: "Enter a valid contact number", position: "bottom", delay: "25" } %>
                         <label for="user_contact_number">Contact Number</label>
@@ -95,22 +125,165 @@
                       <input class="file-path validate" type="text"/>
                       <div class="btn">
                         <span>File</span>
-                        <input type="file" />
+                        <%= f.file_field :user_photo, class: "tooltipped", data: { regex_bak: ".+", tooltip: "Please upload a photo", position: "bottom", delay: "25" }, onchange:"previewFile()" %>
                       </div>
                     </div>
                     <p>
                         <input type="checkbox" id="checkbox_terms">
                         <label for="checkbox_terms">I agree to the <a href="#">terms of use</a>.</label>
                     </p>
-                    <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover modal-trigger" href="#modal1">Sign Up</button>
+                    <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover" id="btn-confirm-dialog">Sign Up</button>
                 </div>
               <% end %>
 
               <!-- Modal Structure -->
-              <div id="modal1" class="modal z-depth-4 blue lighten-2 white-text">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-                <div class="action-bar">
-                  <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
+              <div id="confirmation-dialog" class="modal card modal-contact-card z-depth-3 z-depth-5-hover" style="padding:0px">
+                  <div class="teal lighten-2 z-depth-2">
+                    <div class="row contact-card-row">
+                      <div class="col s8" style="padding-left:4.3rem">
+                        <h1 class="light grey-text text-lighten-3" style="line-height:1.5em">Archit Srivastava</h1>
+                        <h3 class="light grey-text text-lighten-2"><i>12-IT-63</i></h3>
+                      </div>
+                    </div>
+                    <%= image_tag("_con/images/user7.jpg", class: "img-circle z-depth-3 contact-card-profile-img") %>
+                  </div>
+                  <div class="content">
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-phone"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Contact Number</i></h5>
+                          <h5 class="card-info">+91 9868141321</h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-envelope"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Email</i></h5>
+                          <h5 class="card-info">arch.srivastava.2@gmail.com</h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-birthday-cake"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Date of Birth</i></h5>
+                          <h5 class="card-info">20th August 1994</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="title contact-card-title">
+                        <div class="row">
+                          <div class="col s8 teal-text text-lighten-2">
+                            <h4>College Info</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-graduation-cap"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Branch</i></h5>
+                          <h5 class="card-info">Information Technology</h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-calendar"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Year of Joining</i></h5>
+                          <h5 class="card-info">2012</h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-credit-card"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Registration No</i></h5>
+                          <h5 class="card-info">20120701</h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-bar-chart"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>CGPA</i></h5>
+                          <h5 class="card-info">8.954</h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-info"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>AIEEE Rank</i></h5>
+                          <h5 class="card-info">14133</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="title contact-card-title">
+                        <div class="row">
+                          <div class="col s8 teal-text text-lighten-2">
+                            <h4>School</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-institution"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>School</i></h5>
+                          <h5 class="card-info">DPS Mathura Road</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="title contact-card-title">
+                        <div class="row">
+                          <div class="col s8 teal-text text-lighten-2">
+                            <h4>Extra</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-soccer-ball-o"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Hobbies</i></h5>
+                          <h5 class="card-info">Sports, Music, Dance</h5>
+                        </div>
+                      </div>
+                    </div>
+                <div class="action-bar" style="text-align:center !important;">
+                  <div class="row">
+                    <div class="col s3 offset-s3">
+                      <a id="btn-sign-up" href="#" class="waves-effect waves-light teal accent-4 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover">Confirm</a>
+                    </div>
+                    <div class="col s3">
+                      <a href="#" class="waves-effect waves-light red accent-2 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover modal-action modal-close">Cancel</a>
+                    </div>
+                  </div>
                 </div>
               </div>
