@@ -27,10 +27,14 @@ class User
   field :gender,             type: String, default: "male"
   field :year_of_joining,    type: Integer, default: 2010
   field :branch,             type: String, default: "IT"
+  field :roll_no,            type: String, default: ""
   field :registration_no,    type: String, default: ""
   field :contact_number,     type: Integer, default: "9999999999"
   field :address,            type: String, default: ""
   field :hobbies,            type: Array, default: []
+  field :cgpa,               type: Float, default: 5.00
+  field :rank_aieee,         type: Integer, default: 1000
+  field :school,             type: String, default: ""
 
   field :disable,            type: Boolean, default: true
 
