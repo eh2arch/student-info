@@ -94,10 +94,10 @@ $(document).ready(function(){
 	$("#btn-confirm-dialog").click(function(e){
 		e.preventDefault();
 		$("input,textarea").trigger("change");
-		// if(checkFormValidated()) {
+		if(checkFormValidated()) {
 			$("#confirmation-dialog").openModal();
 			$("body").animate({scrollTop:0}, '1000');
-		// }
+		}
 	});
 	$("#btn-sign-up").click(function(e){
 		$("form").submit();
