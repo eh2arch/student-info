@@ -2,6 +2,10 @@ class User
   include Mongoid::Document
   include Mongoid::History::Trackable
   include Mongoid::Userstamp::User
+  include Mongoid::Paperclip
+
+  has_mongoid_attached_file :avatar
+  validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   track_history({
     track_create: true,
@@ -72,6 +76,10 @@ class User
 
   def title
     self.email
+  end
+
+  def active_for_authentication?
+    super && !self.disabled
   end
 
 end
