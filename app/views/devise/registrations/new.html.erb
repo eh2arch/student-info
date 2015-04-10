@@ -122,10 +122,10 @@
                     <br />
                     <br />
                     <div class="file-field input-field">
-                      <input class="file-path validate" type="text"/>
+                      <input id="file_upload_fake" class="file-path validate tooltipped" type="text" data-regex=".+" data-tooltip="Please upload a photo" data-position="bottom" data-delay="25" />
                       <div class="btn">
                         <span>File</span>
-                        <%= f.file_field :avatar, class: "tooltipped", data: { regex_bak: ".+", tooltip: "Please upload a photo", position: "bottom", delay: "25" } %>
+                        <%= f.file_field :avatar %>
                       </div>
                     </div>
                     <p>
@@ -135,7 +135,10 @@
                     <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover" id="btn-confirm-dialog">Sign Up</button>
                 </div>
               <% end %>
-
-              <script>
-                var authenticity_token = "<%= form_authenticity_token %>";
-              </script>
+              <% content_for :scripts do %>
+                <script>
+                  var authenticity_token = "<%= form_authenticity_token %>";
+                </script>
+                <%= stylesheet_link_tag "registration.css" %>
+                <%= javascript_include_tag "registration_script.js" %>
+              <% end %>
