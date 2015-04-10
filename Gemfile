@@ -9,6 +9,8 @@ gem 'cancancan'
 gem 'rails_admin'
 # History
 gem 'mongoid-audit', '~> 1.0.0'
+#Uploads
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
