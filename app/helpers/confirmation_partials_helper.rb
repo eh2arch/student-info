@@ -1,0 +1,2 @@
+module ConfirmationPartialsHelper
+end

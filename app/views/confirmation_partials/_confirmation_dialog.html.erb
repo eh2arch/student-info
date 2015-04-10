@@ -1,0 +1,163 @@
+              <!-- Modal Structure -->
+              <div id="confirmation-dialog" class="modal card modal-contact-card z-depth-3 z-depth-5-hover" style="padding:0px">
+                  <div class="teal lighten-2 z-depth-2">
+                    <div class="row contact-card-row">
+                      <div class="col s8" style="padding-left:4.3rem">
+                        <h1 class="light grey-text text-lighten-3" style="line-height:1.5em"><%=@params[:first_name] + " " + @params[:last_name]%></h1>
+                        <h3 class="light grey-text text-lighten-2"><i><%=@params[:roll_no]%></i></h3>
+                      </div>
+                    </div>
+                    <%= image_tag("_con/images/user7.jpg", class: "img-circle z-depth-3 contact-card-profile-img") %>
+                  </div>
+                  <div class="content">
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-phone"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Contact Number</i></h5>
+                          <h5 class="card-info"><%=@params[:contact_number]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-envelope"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Email</i></h5>
+                          <h5 class="card-info"><%=@params[:email]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-birthday-cake"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Date of Birth</i></h5>
+                          <h5 class="card-info"><%=@params[:date_of_birth]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-home"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Address</i></h5>
+                          <h5 class="card-info"><%=@params[:address]%></h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="title contact-card-title">
+                        <div class="row">
+                          <div class="col s8 teal-text text-lighten-2">
+                            <h4>College Info</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-graduation-cap"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Branch</i></h5>
+                          <h5 class="card-info"><%=@params[:branch]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-calendar"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Year of Joining</i></h5>
+                          <h5 class="card-info"><%=@params[:year_of_joining]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-credit-card"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Registration No</i></h5>
+                          <h5 class="card-info"><%=@params[:registration_no]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-bar-chart"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>CGPA</i></h5>
+                          <h5 class="card-info"><%=@params[:cgpa]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-info"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>AIEEE Rank</i></h5>
+                          <h5 class="card-info"><%=@params[:rank_aieee]%></h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="title contact-card-title">
+                        <div class="row">
+                          <div class="col s8 teal-text text-lighten-2">
+                            <h4>School</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-institution"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>School</i></h5>
+                          <h5 class="card-info"><%=@params[:school]%></h5>
+                        </div>
+                      </div>
+                    </div>
+                    <% unless @params[:hobbies].nil? %>
+                    <div class="card-panel contact-card-card-panel">
+                      <div class="title contact-card-title">
+                        <div class="row">
+                          <div class="col s8 teal-text text-lighten-2">
+                            <h4>Extra</h4>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-soccer-ball-o"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Hobbies</i></h5>
+                          <h5 class="card-info"><%=@params[:hobbies].join(", ")%></h5>
+                        </div>
+                      </div>
+                    </div>
+                    <% end %>
+                <div class="action-bar" style="text-align:center !important;">
+                  <div class="row">
+                    <div class="col s3 offset-s3">
+                      <a id="btn-sign-up" href="#" class="waves-effect waves-light teal accent-4 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover">Confirm</a>
+                    </div>
+                    <div class="col s3">
+                      <a href="#" class="waves-effect waves-light red accent-2 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover modal-action modal-close">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>

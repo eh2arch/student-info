@@ -23,6 +23,7 @@
 	position: absolute;
 	max-height: none;
 	overflow-y: hidden;
+	top: 20px !important;
 }
 .card-panel:before {
 	display: none;

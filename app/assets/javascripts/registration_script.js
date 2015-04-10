@@ -94,12 +94,31 @@ $(document).ready(function(){
 	$("#btn-confirm-dialog").click(function(e){
 		e.preventDefault();
 		$("input,textarea").trigger("change");
-		if(checkFormValidated()) {
-			$("#confirmation-dialog").openModal();
-			$("body").animate({scrollTop:0}, '1000');
+		image_flag = false;
+		image_upload = document.querySelector('input[type=file]').files[0];
+		if(image_upload !== undefined && image_upload.type.match("image")) { image_flag = true; }
+		if(checkFormValidated() && image_flag) {
+			form_data = $("form").serialize();
+			form_data["authenticity_token"] = authenticity_token;
+	        $.ajax(
+	        {
+	            url: "/confirm",
+	            data: form_data,
+	            success: function(data)
+	            {
+	            	$("#confirmation-dialog").remove();
+	            	$("body").append(data);
+					$("#btn-sign-up").click(function(e){
+						console.log("sdfdsf");
+						$("form").submit();
+					});
+					previewFile();
+					$("#confirmation-dialog").openModal();
+					$("body").animate({scrollTop:0}, '1000');
+
+	            },
+	            type: 'post'
+	        });
 		}
-	});
-	$("#btn-sign-up").click(function(e){
-		$("form").submit();
 	});
 });
