@@ -105,7 +105,7 @@
                         </label>
                     </div>
                     <div class="input-field"><i class="fa fa-phone prefix"></i>
-                      <%= f.text_field :contact_number, class: "tooltipped", data: { regex: "^[0-9]{10}$", tooltip: "Enter a valid contact number", position: "bottom", delay: "25" }, value: "teri" %>
+                      <%= f.text_field :contact_number, class: "tooltipped", data: { regex: "^[0-9]{10}$", tooltip: "Enter a valid contact number", position: "bottom", delay: "25" } %>
                         <label for="user_contact_number">Contact Number</label>
                     </div>
                     <div class="input-field"><i class="fa fa-home prefix"></i>
@@ -125,7 +125,7 @@
                       <input class="file-path validate" type="text"/>
                       <div class="btn">
                         <span>File</span>
-                        <%= f.file_field :user_photo, class: "tooltipped", data: { regex_bak: ".+", tooltip: "Please upload a photo", position: "bottom", delay: "25" } %>
+                        <%= f.file_field :avatar, class: "tooltipped", data: { regex_bak: ".+", tooltip: "Please upload a photo", position: "bottom", delay: "25" } %>
                       </div>
                     </div>
                     <p>

@@ -1,6 +1,6 @@
 function previewFile() {
   var preview = $(".contact-card-profile-img")[0];
-  var file    = document.querySelector('input[type=file]').files[0];
+  var file    = document.querySelector('input[id$="avatar"]').files[0];
   var reader  = new FileReader();
 
   reader.onloadend = function () {
@@ -95,7 +95,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		$("input,textarea").trigger("change");
 		image_flag = false;
-		image_upload = document.querySelector('input[type=file]').files[0];
+		image_upload = document.querySelector('input[id$="avatar"]').files[0];
 		if(image_upload !== undefined && image_upload.type.match("image")) { image_flag = true; }
 		if(checkFormValidated() && image_flag) {
 			form_data = $("form").serialize();
