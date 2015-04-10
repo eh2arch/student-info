@@ -6,10 +6,9 @@
 
     <body>
         <section id="sign-up">
-        <%=yield%>
+        <%= yield %>
         </section>
         <%= render partial: 'layouts/footer' %>
-        <%= stylesheet_link_tag "registration.css" %>
-        <%= javascript_include_tag "registration_script.js" %>
+        <%= yield :scripts %>
     </body>
 </html>
