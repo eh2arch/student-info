@@ -27,7 +27,7 @@ class User
   field :encrypted_password, type: String, default: ""
   field :first_name,         type: String, default: ""
   field :last_name,          type: String, default: ""
-  field :date_of_birth,      type: DateTime, default: DateTime.now
+  field :date_of_birth,      type: Date, default: Date.today
   field :gender,             type: String, default: "male"
   field :year_of_joining,    type: Integer, default: 2010
   field :branch,             type: String, default: "IT"
