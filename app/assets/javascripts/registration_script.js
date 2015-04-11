@@ -57,6 +57,9 @@ $(document).ready(function(){
     function isInt(n) { return parseInt(n) == n && parseInt(n)>0; }
 
 	function changeRollNo() {
+		if($("input[id$='roll_no']").length == 0) {
+			return;
+		}
 		originalValue = $("input[id$='roll_no']").val();
 		rollNumber = null;
 		if(originalValue.split("-").length == 3){
