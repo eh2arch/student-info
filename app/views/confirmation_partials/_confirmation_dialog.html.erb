@@ -62,7 +62,7 @@
                       <hr />
                       <div class="row">
                         <div class="col s2 offset-s1 teal-text text-lighten-2">
-                          <h2><i class="fa fa-graduation-cap"></i></h2>
+                          <h2><i class="fa fa-sitemap"></i></h2>
                         </div>
                         <div class="col s8 card-panel-info">
                           <h5><i>Branch</i></h5>
@@ -77,6 +77,16 @@
                         <div class="col s8 card-panel-info">
                           <h5><i>Year of Joining</i></h5>
                           <h5 class="card-info"><%=@params[:year_of_joining]%></h5>
+                        </div>
+                      </div>
+                      <hr width="90%" />
+                      <div class="row">
+                        <div class="col s2 offset-s1 teal-text text-lighten-2">
+                          <h2><i class="fa fa-graduation-cap"></i></h2>
+                        </div>
+                        <div class="col s8 card-panel-info">
+                          <h5><i>Roll No</i></h5>
+                          <h5 class="card-info"><%=@params[:roll_no]%></h5>
                         </div>
                       </div>
                       <hr width="90%" />
@@ -156,7 +166,7 @@
                       <a id="btn-sign-up" href="#" class="waves-effect waves-light teal accent-4 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover">Confirm</a>
                     </div>
                     <div class="col s3">
-                      <a href="#" class="waves-effect waves-light red accent-2 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover modal-action modal-close">Cancel</a>
+                      <a id="btn-sign-up-cancel" href="#" class="waves-effect waves-light red accent-2 btn btn-extra btn-rounded z-depth-2 z-depth-3-hover modal-action modal-close">Cancel</a>
                     </div>
                   </div>
                 </div>
