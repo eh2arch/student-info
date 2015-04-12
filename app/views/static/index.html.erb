@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Welcome! | Student Information System
+        </title>
+        <%= render partial: 'layouts/head' %>
+        <style type="text/css">
+        .btn-signup:hover {
+            border-color:rgba(21, 21, 23, 1) !important;
+            color:rgba(255, 255, 255, 0.74) !important;
+            background-color:rgba(21, 21, 23, 0.70) !important;
+        }
+        .btn-login:hover {
+            border-style:none;
+            border-color:#151517 #151517 rgba(21, 21, 23, 0.90);
+            color:rgba(255, 255, 255, 0.74) !important;
+        }
+        @-webkit-keyframes example {
+            from {-webkit-transform: translate(0,0);}
+            to {-webkit-transform: translate(25px,0) scale(1.1,0.8);}
+        }
+        </style>
+    </head>
+
+    <body>
+        <section id="sign-up" style="background-image:url('assets/_con/images/3.jpg');background-size:cover">
+            <div style="opacity: 0.80;background-color:black;position:fixed;top:0px;left:0px;width:100%;height:100%; text-align:center;vertical-align:middle">
+            </div>
+            <div style="position:fixed;top:40%;right:20%;display:block;">
+                <a href="/">
+                    <h1 style="font-size:100px;color:rgb(200, 189, 189);font-weight:100;-webkit-animation:example 0.5s infinite alternate;"><i class="mdi-navigation-chevron-right"></i>
+                    </h1>
+                </a>
+            </div>
+            <div id="page-message" style="position: fixed;left: 20%;top: 15%;display: block;text-align:left">
+                <div class="row">
+                    <h1 class="red-text text-accent-2" style="font-size:85px;line-height:85px">STUDENT INFO</h1>
+                </div>
+                <div class="row">
+                    <h1 class="white-text text-accent-2" style="font-size:85px;margin-bottom:75px;line-height:85px">SYSTEM</h1>
+                </div>
+                <div class="row">
+                    <a href="/" class="btn btn-extra btn-login z-depth-3-hover teal white-text" style="color:rgba(200,200,200,0.8);background:#303037;border-width:2px;transition:all 500ms ease;width:200px;opacity:0.85">ENTER</a>
+                    <a href="/users/sign_up" class="btn btn-extra btn-signup" style="background:rgba(48, 48, 55, 0.7);border:2px solid white;transition:all 500ms ease;margin-left:20px;width:200px">SIGN UP</a>
+
+                </div>
+            </div>
+        </section>
+        <%= render partial: 'layouts/footer' %>
+        <%= yield :scripts %>
+    </body>
+</html>
