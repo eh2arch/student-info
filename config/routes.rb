@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 
   root :to => 'application#home'
   post 'confirm' => 'confirmation_partials#confirm'
+  get 'home' => 'application#home'
+  get 'students' => 'application#students'
+  get 'students/:branch' => 'application#students'
+  get 'requests' => 'application#requests'
+  get 'requests/:branch' => 'application#requests'
+  post 'pending_status' => 'application#pending_status'
+  post 'destroy' => 'application#destroy'
+  get 'index' => 'static#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

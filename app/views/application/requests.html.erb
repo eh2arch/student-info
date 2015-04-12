@@ -1,0 +1,140 @@
+<% @title = "Requests | Student Information System" %>
+				<div class="card">
+				    <div class="title">
+				        <h5>Requests</h5>
+				        <div class="btn-group right">
+				        	<a href="#" class="btn btn-small z-depth-1 waves-light tooltipped select" data-position="bottom" data-delay="25" data-tooltip="Accept all"><i class="mdi-content-select-all"></i></a>
+				        	<a href="#" class="btn btn-small red lighten-1 z-depth-1 waves-light tooltipped unselect" data-position="bottom" data-delay="25" data-tooltip="Unselect all"><i class="mdi mdi-content-backspace"></i></a>
+				        	<a href="#" class="array-accept btn btn-small z-depth-1 waves-light green tooltipped" data-position="bottom" data-delay="25" data-tooltip="Accept"><i class="mdi mdi-action-done-all"></i></a>
+				        	<a href="#" class="array-reject btn btn-small red lighten-1 z-depth-1 waves-light tooltipped" data-position="bottom" data-delay="25" data-tooltip="Reject"><i class="fa fa-close"></i></a>
+			        	</div>
+				    </div>
+				    <div class="content table-responsive">
+				        <table class="table table-hover">
+				            <thead>
+				                <tr>
+				                    <th>Select</th>
+				                    <th>Image</th>
+				                    <th>Name</th>
+				                    <th>Roll No</th>
+				                    <th>Branch</th>
+				                    <th>Status</th>
+				                    <th>Action</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				            <% @requests.each_with_index do |request, index| %>
+				                <tr class="black-text">
+				                    <th>
+				                        <input type="checkbox" name="request[]" id="checkbox<%=index%>" value="<%= request.id %>">
+				                        <label for="checkbox<%=index%>"></label>
+				                    </th>
+				                    <td>
+				                    	<%= image_tag request.avatar.url, class: "circle photo z-depth-2 z-depth-3-hover", width: "50px", height: "50px", data: { params: request, img_src: request.avatar.url } %>
+			                    	</td>
+				                    <td>
+				                    	<%= request.first_name + " " + request.last_name %>
+				                    </td>
+				                    <td><%= request.roll_no %></td>
+				                    <td><%= request.branch %></td>
+				                    <td class="blue-text status">Pending</td>
+				                    <td class="action-buttons">
+				                    	<a href="#" data-id="<%= request.id %>" class="single-accept btn btn-small z-depth-1 waves-effect waves-light green tooltipped" data-position="bottom" data-delay="25" data-tooltip="Accept">
+					                    	<i class="mdi-navigation-check light"></i>
+				                    	</a>
+				                    	<a href="#" data-id="<%= request.id %>" class="single-reject btn btn-small z-depth-1 waves-effect waves-light red tooltipped" data-position="bottom" data-delay="25" data-tooltip="Reject">
+					                    	<i class="mdi-navigation-close light"></i>
+				                    	</a>
+			                    	</td>
+				                </tr>
+			                <% end %>
+				            </tbody>
+				        </table>
+				    </div>
+				</div>
+<% content_for :scripts do %>
+    <%= stylesheet_link_tag "registration.css" %>
+    <%= javascript_include_tag "registration_script.js" %>
+    <script>
+        $("img").click(function(){
+            form_data_child = $(this).data("params");
+            form_data = {};
+            form_data["user"] = form_data_child;
+            form_data["authenticity_token"] = "<%= form_authenticity_token %>";
+            img_src = $(this).data("img-src");
+            $.ajax(
+            {
+                url: "/confirm",
+                data: form_data,
+                success: function(data)
+                {
+                    $("#confirmation-dialog").remove();
+                    $("body").append(data);
+                    $(".contact-card-profile-img").attr("src", img_src);
+                    $("#btn-sign-up").parent().remove();
+                    $("#btn-sign-up-cancel").parent().removeClass("s3").addClass("offset-s4").addClass("s4");
+                    $("#confirmation-dialog").openModal();
+                    $("body").animate({scrollTop:0}, '1000');
+                },
+                type: 'post'
+            });
+        });
+    	function changeStatus(state, ids) {
+            $.ajax(
+            {
+                url: "/pending_status",
+                data: { "state":state, "ids":ids, "authenticity_token": "<%=form_authenticity_token%>" },
+                type: 'post'
+            });
+    	}
+        $("[class^='single-']").click(function(){
+        	element = $(this);
+        	state = element.attr("class").split(" ")[0].split("-")[1];
+    		element.parent().hide("slow");
+    		element.parent().siblings(".status").text(state.charAt(0).toUpperCase() + state.slice(1) + "ed");
+    		color_status = (state == "accept") ? "green" : "red";
+    		element.parent().siblings(".status").removeClass("blue-text").addClass(color_status + "-text");
+    		ids = [element.data("id")];
+    		changeStatus(state, ids);
+        });
+		$("[class$='select']").click(function(e){
+			e.preventDefault();
+			element = $(this);
+			classList = element.attr("class").split(" ");
+			if(classList[classList.length - 1] === "select") {
+				$("input[type='checkbox']").prop("checked", true);
+			}
+			else {
+				$("input[type='checkbox']").prop("checked", false);
+			}
+		});
+		$("[class^='array-']").click(function(e){
+			e.preventDefault();
+			state = $(this).attr("class").split(" ")[0].split("-")[1];
+			ids = [];
+			checkboxes = $("input[name='request[]']");
+			for(i = 0; i < checkboxes.length; i++) {
+				if(checkboxes[i].checked) {
+					ids.push(checkboxes[i].value);
+					$(checkboxes[i]).parent().siblings(".action-buttons").hide("slow");
+					$(checkboxes[i]).parent().siblings(".status").text(state.charAt(0).toUpperCase() + state.slice(1) + "ed");
+					color_status = (state == "accept") ? "green" : "red";
+            		$(checkboxes[i]).parent().siblings(".status").removeClass("blue-text").addClass(color_status + "-text");
+				}
+			}
+			changeStatus(state, ids);
+		});
+    </script>
+<% end %>
+<% content_for :breadcrumbs do %>
+	                    <ul>
+	                        <li><a href="/"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-right"></i></li>
+	                        <li><a href="/requests"><i class="mdi-action-done-all"></i> Requests </a>
+	                        <% if params[:branch] %>
+	                        </li><i class="fa fa-angle-right"></i> <li><a href="/requests/<%=params[:branch]%>"><i class="fa fa-gears"></i> <%=params[:branch]%></a></li>
+	                        <% else %>
+	                        </li>
+	                        <% end %>
+	                    </ul>
+
+<% end %>
