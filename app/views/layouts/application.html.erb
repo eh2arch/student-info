@@ -19,15 +19,17 @@
 	            </a>
 	            <a href="#!" class="brand-logo"><img alt=""></a>
 	            <ul>
-	                <li><a href="#!" class="search-bar-toggle"><i class="mdi-action-search"></i></a></li>
+	                <!-- <li><a href="#!" class="search-bar-toggle"><i class="mdi-action-search"></i></a></li> -->
 	                <li class="user">
-	                    <a class="dropdown-button" href="#!" data-activates="user-dropdown"><img src="assets/_con/images/user.jpg" alt="John Doe" class="circle">John Doe<i class="mdi-navigation-expand-more right"></i></a>
+	                    <a class="dropdown-button" href="#!" data-activates="user-dropdown"><%= image_tag current_user.avatar.url, class: "circle", alt: current_user.first_name + " " + current_user.last_name, width: "35px", height: "35px" %><%=current_user.first_name + " " + current_user.last_name%><i class="mdi-navigation-expand-more right"></i></a>
 	                    <ul id="user-dropdown" class="dropdown-content">
-	                        <li><a href="page-profile.html"><i class="fa fa-user"></i> Profile</a></li>
-	                        <li><a href="mail-inbox.html"><i class="fa fa-envelope"></i> Messages <span class="badge new">2</span></a></li>
-	                        <li><a href="#!"><i class="fa fa-cogs"></i> Settings</a></li>
+	                        <li><a href="/users/edit"><i class="fa fa-edit"></i> Edit Profile</a></li>
 	                        <li class="divider"></li>
-	                        <li><a href="page-sign-in.html"><i class="fa fa-sign-out"></i> Logout</a></li>
+	                        <li>
+								<%= link_to destroy_session_path(:user), :method => :delete do %>
+									Logout <i class="ion-log-out"></i>
+								<% end %>
+	                        </li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -48,125 +50,51 @@
 	            <div class="nano-content">
 	                <ul>
 	                    <li class="label">Menu</li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> Dashboards<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-dashboard"></i> Dashboard<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 	                        <ul>
-	                            <li><a href="dashboard.html" class="waves-effect waves-blue">Dashboard <span class="badge new"></span></a></li>
-	                            <li><a href="dashboard-v1.html" class="waves-effect waves-blue">Dashboard v1</a></li>
+	                            <li><a href="/home" class="waves-effect waves-blue"><i class="fa fa-user"></i>Profile</a></li>
 	                        </ul>
 	                    </li>
-	                    <li><a href="widgets.html" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Widgets</a></li>
-	                    <li><a href="layouts.html" class="waves-effect waves-blue"><i class="mdi mdi-av-web"></i> Layouts</a></li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i> Menu Levels<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+	                    <% if current_user.admin? %>
+	                    <li class="label">View</li>
+	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-indent"></i> Students<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
 	                        <ul>
-	                            <li><a class="yay-sub-toggle waves-effect waves-blue" href="#!">Second Level<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                                <ul>
-	                                    <li><a class="yay-sub-toggle waves-effect waves-blue" href="#!">Third Level<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                                        <ul>
-	                                            <li><a href="#!" class="waves-effect waves-blue">Fourth Level</a></li>
-	                                            <li><a href="#!" class="waves-effect waves-blue">Fourth Level</a></li>
-	                                            <li><a href="#!" class="waves-effect waves-blue">Fourth Level</a></li>
-	                                        </ul>
-	                                    </li>
-	                                    <li><a class="yay-sub-toggle waves-effect waves-blue" href="#!">Third Level<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                                        <ul>
-	                                            <li><a href="#!" class="waves-effect waves-blue">Fourth Level</a></li>
-	                                            <li><a href="#!" class="waves-effect waves-blue">Fourth Level</a></li>
-	                                            <li><a href="#!" class="waves-effect waves-blue">Fourth Level</a></li>
-	                                        </ul>
-	                                    </li>
-	                                </ul>
-	                            </li>
+	                            <li><a href="/students/" class="waves-effect waves-blue"><i class="fa fa-group"></i>All</a></li>
+                                <li><a class="yay-sub-toggle waves-effect waves-blue" href="#!"><i class="fa fa-gears"></i>Departments<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
+                                    	<% @department_list.each_key do |key| %>
+                                        <li><a href="/students/<%=@department_list[key]%>" class="waves-effect waves-blue"><%=key%></a></li>
+                                    	<% end %>
+                                    </ul>
+                                </li>
 	                        </ul>
 	                    </li>
-	                    <li class="label">Elements</li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-css3"></i> CSS<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+	                    <li class="label">Actions</li>
+	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="mdi-action-done-all"></i> Requests<span class="yay-collapse-icon mdi-navigation-expand-more"></span>
+	                    <% if @requests_all > 0 %>
+	                    <span class="badge new"><%=@requests_all%></span>
+	                    <% end %>
+	                    </a>
 	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="css-alerts.html"><i class="mdi-alert-warning"></i> Alerts</a></li>
-	                            <li><a class="waves-effect waves-blue" href="css-badges.html"><i class="mdi-action-stars"></i> Badges</a></li>
-	                            <li><a class="waves-effect waves-blue" href="css-colors.html"><i class="mdi-image-palette"></i> Colors</a></li>
-	                            <li><a class="waves-effect waves-blue" href="css-grid.html"><i class="mdi-action-dashboard"></i> Grid</a></li>
-	                            <li><a class="waves-effect waves-blue" href="css-icons.html"><i class="mdi-communication-invert-colors-on"></i> Icons</a></li>
-	                            <li><a class="waves-effect waves-blue" href="css-shadow.html"><i class="mdi-maps-layers"></i> Shadow</a></li>
-	                            <li><a class="waves-effect waves-blue" href="css-typography.html"><i class="fa fa-font"></i> Typography</a></li>
+	                            <li><a href="/requests/" class="waves-effect waves-blue"><i class="mdi-content-select-all"></i>All</a></li>
+                                <li><a class="yay-sub-toggle waves-effect waves-blue" href="#!"><i class="fa fa-gears"></i>Departments<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
+                                    <ul>
+                                    	<% index = 0 %>
+                                    	<% @department_list.each_key do |key| %>
+                                        <li><a href="/requests/<%=@department_list[key]%>" class="waves-effect waves-blue"><%=key%>
+					                    <% if @requests_list[index] > 0 %>
+					                    <span class="badge new"><%=@requests_list[index]%></span>
+					                    <%
+					                    	end
+					                    	index += 1
+					                    %>
+                                        </a></li>
+                                    	<% end %>
+                                    </ul>
+                                </li>
 	                        </ul>
 	                    </li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-cubes"></i> UI Elements<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="ui-buttons.html"><i class="fa fa-square"></i> Buttons</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-cards.html"><i class="mdi-av-web"></i> Cards</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-collapsible.html"><i class="mdi-action-view-day"></i> Collapsible</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-collections.html"><i class="fa fa-server"></i> Collections</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-dropdown.html"><i class="mdi-navigation-arrow-drop-down-circle"></i> Dropdown</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-modals.html"><i class="fa fa-external-link"></i> Modals</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-progress-bars.html"><i class="fa fa-tasks"></i> Progress Bars</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-tables.html"><i class="fa fa-table"></i> Tables</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-tabs.html"><i class="mdi-action-tab-unselected"></i> Tabs</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-toasts.html"><i class="mdi-action-announcement"></i> Toasts</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-tooltips.html"><i class="fa fa-comment-o"></i> Tooltips</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-waves.html"><i class="mdi-image-blur-on"></i> Waves</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ui-search-bar.html"><i class="mdi-action-search"></i> Search Bar</a></li>
-	                        </ul>
-	                    </li>
-	                    <li class="label">Components</li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-check-square-o"></i> Forms<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="forms-base.html"><i class="fa fa-cubes"></i> Base Elements</a></li>
-	                            <li><a class="waves-effect waves-blue" href="forms-editors.html"><i class="fa fa-edit"></i> Editors</a></li>
-	                            <li><a class="waves-effect waves-blue" href="forms-checkout.html"><i class="fa fa-shopping-cart"></i> Checkout</a></li>
-	                            <li><a class="waves-effect waves-blue" href="forms-contacts.html"><i class="fa fa-comment"></i> Contacts</a></li>
-	                            <li><a class="waves-effect waves-blue" href="forms-login.html"><i class="fa fa-sign-in"></i> Login</a></li>
-	                            <li><a class="waves-effect waves-blue" href="forms-register.html"><i class="fa fa-edit"></i> Register</a></li>
-	                        </ul>
-	                    </li>
-	                    <li class="open"><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-globe"></i> Pages<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="page-profile.html">Profile</a></li>
-	                            <li><a class="waves-effect waves-blue" href="page-forgot-password.html">Forgot Password</a></li>
-	                            <li><a class="waves-effect waves-blue" href="page-lock.html">Screen Lock</a></li>
-	                            <li><a class="waves-effect waves-blue" href="page-sign-in.html">Sign In</a></li>
-	                            <li><a class="waves-effect waves-blue" href="page-sign-up.html">Sign Up</a></li>
-	                            <li><a class="waves-effect waves-blue" href="page-404.html">404</a></li>
-	                            <li><a class="waves-effect waves-blue" href="page-500.html">500</a></li>
-	                            <li class="active"><a class="waves-effect waves-blue" href="page-blank.html">Blank</a></li>
-	                        </ul>
-	                    </li>
-	                    <li class="label">Extra</li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-envelope"></i> Mailbox<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="mail-inbox.html"><i class="mdi-content-inbox"></i> Inbox</a></li>
-	                            <li><a class="waves-effect waves-blue" href="mail-compose.html"><i class="mdi-content-add-circle"></i> Compose</a></li>
-	                            <li><a class="waves-effect waves-blue" href="mail-view.html"><i class="mdi-content-drafts"></i> View</a></li>
-	                        </ul>
-	                    </li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="mdi mdi-action-shopping-cart"></i> eCommerce<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-dashboard.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-products.html"><i class="fa fa-tags"></i> Products</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-product-single.html"><i class="fa fa-tag"></i> Product Single</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-orders.html"><i class="fa fa-cart-plus"></i> Orders</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-order-single.html"><i class="fa fa-cart-plus"></i> Order Single</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-customers.html"><i class="fa fa-users"></i> Customers</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-settings.html"><i class="fa fa-cog"></i> Settings</a></li>
-	                            <li><a class="waves-effect waves-blue" href="ecommerce-invoice.html"><i class="ion ion-android-list"></i> Invoice</a></li>
-	                        </ul>
-	                    </li>
-	                    <li><a class="yay-sub-toggle waves-effect waves-blue"><i class="fa fa-bar-chart"></i> Charts<span class="yay-collapse-icon mdi-navigation-expand-more"></span></a>
-	                        <ul>
-	                            <li><a class="waves-effect waves-blue" href="charts-flot.html">Flot</a></li>
-	                            <li><a class="waves-effect waves-blue" href="charts-rickshaw.html">Rickshaw</a></li>
-	                            <li><a class="waves-effect waves-blue" href="charts-sparkline.html">Sparkline</a></li>
-	                            <li><a class="waves-effect waves-blue" href="charts-nvd3.html">NVD3</a></li>
-	                        </ul>
-	                    </li>
-	                    <li class="label">Stats</li>
-	                    <li class="content"><span><i class="fa fa-spinner"></i> Server Load</span>
-	                        <div class="progress small light-green lighten-4">
-	                            <div class="light-green accent-5" style="width:37%"></div>
-	                        </div><span><i class="fa fa-thumbs-o-up"></i> User Satisfaction</span>
-	                        <div class="progress small">
-	                            <div style="width:91%"></div>
-	                        </div>
-	                    </li>
+	                    <% end %>
 	                </ul>
 	            </div>
 	        </div>
@@ -175,81 +103,15 @@
 	        <div class="page-title">
 	            <div class="row">
 	                <div class="col s12 m9 l10">
-	                    <h1>Blank</h1>
-	                    <ul>
-	                        <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-right"></i></li>
-	                        <li><a href="dashboard.html">Dashboard</a> <i class="fa fa-angle-right"></i></li>
-	                        <li><a href="#">Pages</a> <i class="fa fa-angle-right"></i></li>
-	                        <li><a href="page-blank.html">Blank</a></li>
-	                    </ul>
+	                <%= yield :breadcrumbs %>
 	                </div>
 	            </div>
 	        </div>
             <%=yield%>
 	    </section>
-	    <div class="search-bar">
-	        <div class="layer-overlay"></div>
-	        <div class="layer-content">
-	            <form action="#!"><a class="search-bar-toggle grey-text text-darken-2" href="#!"><i class="mdi-navigation-close"></i></a>
-	                <div class="input-field"><i class="mdi-action-search prefix"></i>
-	                    <input type="text" name="con-search" placeholder="Search...">
-	                </div>
-	                <div class="search-results">
-	                    <div class="row">
-	                        <div class="col s12 l4">
-	                            <h4>Users</h4>
-	                            <div class="each-result"><img src="assets/_con/images/user2.jpg" alt="Felecia Castro" class="circle photo">
-	                                <div class="title">Felecia Castro</div>
-	                                <div class="label">Content Manager</div>
-	                            </div>
-	                            <div class="each-result"><img src="assets/_con/images/user3.jpg" alt="Max Brooks" class="circle photo">
-	                                <div class="title">Max Brooks</div>
-	                                <div class="label">Programmer</div>
-	                            </div>
-	                            <div class="each-result"><img src="assets/_con/images/user4.jpg" alt="Patsy Griffin" class="circle photo">
-	                                <div class="title">Patsy Griffin</div>
-	                                <div class="label">Support</div>
-	                            </div>
-	                            <div class="each-result"><img src="assets/_con/images/user6.jpg" alt="Vernon Garrett" class="circle photo">
-	                                <div class="title">Vernon Garrett</div>
-	                                <div class="label">Photographer</div>
-	                            </div>
-	                        </div>
-	                        <div class="col s12 l4">
-	                            <h4>Articles</h4>
-	                            <div class="each-result">
-	                                <div class="icon circle blue white-text">MD</div>
-	                                <div class="title">Material Design</div>
-	                                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-	                            </div>
-	                            <div class="each-result">
-	                                <div class="icon circle teal white-text"><i class="fa fa-dashboard"></i></div>
-	                                <div class="title">Admin Dashboard</div>
-	                                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-	                            </div>
-	                            <div class="each-result">
-	                                <div class="icon circle orange white-text">RD</div>
-	                                <div class="title">Responsive Design</div>
-	                                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-	                            </div>
-	                            <div class="each-result">
-	                                <div class="icon circle red white-text"><i class="fa fa-tablet"></i></div>
-	                                <div class="title">Mobile First</div>
-	                                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-	                            </div>
-	                        </div>
-	                        <div class="col s12 l4">
-	                            <h4>Posts</h4>
-	                            <div class="no-result">No results were found ;(</div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </form>
-	        </div>
 	    </div>
 	    <footer>&copy; 2015 <strong>Archit Srivastava</strong>. All rights reserved.</footer>
         <%= render partial: 'layouts/footer' %>
-        <%= stylesheet_link_tag "registration.css" %>
-        <%= javascript_include_tag "registration_script.js" %>
+        <%= yield :scripts %>
     </body>
 </html>
