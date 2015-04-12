@@ -87,7 +87,7 @@
                         </label>
                     </div>
                     <div class="input-field"><i class="fa fa-bar-chart prefix"></i>
-                      <%= f.text_field :cgpa, autocomplete: "off", class: "tooltipped", data: { regex: "^[0-9]{1,2}[\\.]{0,1}[0-9]*$", tooltip: "Enter a valid CGPA", position: "bottom", delay: "25" } %>
+                      <%= f.text_field :cgpa, autocomplete: "off", class: "tooltipped", data: { regex: "^[0-9]{1,2}[\\.]{0,1}[0-9]+$", tooltip: "Enter a valid CGPA", position: "bottom", delay: "25" } %>
                         <label for="user_cgpa">
                           CGPA
                         </label>
@@ -128,10 +128,6 @@
                         <%= f.file_field :avatar %>
                       </div>
                     </div>
-                    <p>
-                        <input type="checkbox" id="checkbox_terms">
-                        <label for="checkbox_terms">I agree to the <a href="#">terms of use</a>.</label>
-                    </p>
                     <button class="waves-effect waves-light btn-large z-depth-0 z-depth-1-hover" id="btn-confirm-dialog">Sign Up</button>
                 </div>
               <% end %>
