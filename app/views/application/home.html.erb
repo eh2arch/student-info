@@ -1,0 +1,18 @@
+<% @title = "Home | Student Information System" %>
+<%= render "confirmation_partials/confirmation_dialog" %>
+<% content_for :scripts do %>
+	<%= stylesheet_link_tag "registration.css" %>
+	<%= javascript_include_tag "registration_script.js" %>
+	<script>
+		$("#confirmation-dialog").css({ position:"static", width:"100%", opacity:1, display:"block" });
+		$("#btn-sign-up").parent().parent().remove();
+		$(".contact-card-profile-img").attr("src","<%=current_user.avatar.url%>");
+	</script>
+<% end %>
+<% content_for :breadcrumbs do %>
+	                    <ul>
+	                        <li><a href="/"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-right"></i></li>
+	                        <li><a href="/home"><i class="fa fa-user"></i> Profile</a></li>
+	                    </ul>
+
+<% end %>
