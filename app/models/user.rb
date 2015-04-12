@@ -40,6 +40,7 @@ class User
   field :rank_aieee,         type: Integer, default: 1000
   field :school,             type: String, default: ""
 
+  field :pending,            type: Boolean, default: true
   field :disable,            type: Boolean, default: true
 
   ## Recoverable
@@ -72,7 +73,7 @@ class User
   end
 
   def active_for_authentication?
-    super && !self.disable?
+    super && !self.pending? && !self.disable?
   end
 
 end
